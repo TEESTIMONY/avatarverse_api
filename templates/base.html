@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}AvatarVerse API{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <div class="container">
+        {% block content %}
+        <h1>AvatarVerse API</h1>
+        <div class="api-status">
+            <h2>API Status</h2>
+            <p>The API is running successfully!</p>
+            <p>Static files are being served correctly.</p>
+        </div>
+        {% endblock %}
+    </div>
+</body>
+</html> 

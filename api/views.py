@@ -138,3 +138,11 @@ def health_check(request):
         'message': 'AvatarVerse API is running'
     }, status=status.HTTP_200_OK)
 
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def static_test(request):
+    """Test static file serving"""
+    from django.shortcuts import render
+    return render(request, 'base.html')
+
