@@ -1,7 +1,8 @@
 from django.urls import path
-from .views import GenerateAvatarView, UserRegistrationView, UserLoginView, CommunityAvatarShareView, CommunityAvatarListView, AvatarReactionView, UserAvatarListView, UserAvatarDeleteView
+from .views import GenerateAvatarView, UserRegistrationView, UserLoginView, CommunityAvatarShareView, CommunityAvatarListView, AvatarReactionView, UserAvatarListView, UserAvatarDeleteView, health_check
 
 urlpatterns = [
+    path('', health_check, name='health_check'),
     path('generate/', GenerateAvatarView.as_view(), name='generate_avatar'),
     path('register/', UserRegistrationView.as_view(), name='register'),
     path('login/', UserLoginView.as_view(), name='login'),

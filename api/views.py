@@ -17,13 +17,15 @@ from .serializers import ReactionSerializer
 from .models import Reaction
 from rest_framework.views import APIView
 from rest_framework.exceptions import ValidationError
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import AllowAny
 
 
 
 
 class GenerateAvatarView(generics.GenericAPIView):
     serializer_class = AvatarSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]  # Temporarily allow anonymous access for testing
 
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -125,4 +127,14 @@ class UserAvatarDeleteView(generics.DestroyAPIView):
 
     def get_queryset(self):
         return Avatar.objects.filter(user=self.request.user)
+
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def health_check(request):
+    """Simple health check endpoint"""
+    return Response({
+        'status': 'healthy',
+        'message': 'AvatarVerse API is running'
+    }, status=status.HTTP_200_OK)
 
