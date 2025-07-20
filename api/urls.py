@@ -1,9 +1,10 @@
 from django.urls import path
-from .views import GenerateAvatarView, UserRegistrationView, UserLoginView, CommunityAvatarShareView, CommunityAvatarListView, AvatarReactionView, UserAvatarListView, UserAvatarDeleteView, health_check, static_test
+from .views import GenerateAvatarView, UserRegistrationView, UserLoginView, CommunityAvatarShareView, CommunityAvatarListView, AvatarReactionView, UserAvatarListView, UserAvatarDeleteView, health_check, static_test, media_test
 
 urlpatterns = [
     path('', health_check, name='health_check'),
     path('static-test/', static_test, name='static_test'),
+    path('media-test/', media_test, name='media_test'),
     path('generate/', GenerateAvatarView.as_view(), name='generate_avatar'),
     path('register/', UserRegistrationView.as_view(), name='register'),
     path('login/', UserLoginView.as_view(), name='login'),

@@ -146,3 +146,31 @@ def static_test(request):
     from django.shortcuts import render
     return render(request, 'base.html')
 
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def media_test(request):
+    """Test media file serving"""
+    from django.conf import settings
+    import os
+    
+    # List available media files
+    media_files = []
+    avatars_dir = os.path.join(settings.MEDIA_ROOT, 'avatars')
+    
+    if os.path.exists(avatars_dir):
+        for filename in os.listdir(avatars_dir):
+            if filename.endswith(('.png', '.jpg', '.jpeg', '.gif')):
+                media_files.append({
+                    'filename': filename,
+                    'url': f'{settings.MEDIA_URL}avatars/{filename}',
+                    'path': os.path.join(avatars_dir, filename)
+                })
+    
+    return Response({
+        'media_root': str(settings.MEDIA_ROOT),
+        'media_url': settings.MEDIA_URL,
+        'available_files': media_files,
+        'total_files': len(media_files)
+    }, status=status.HTTP_200_OK)
+

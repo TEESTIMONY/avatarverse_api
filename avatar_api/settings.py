@@ -163,5 +163,10 @@ CORS_ALLOWED_ORIGINS = [
 # For development only (allows all origins - remove in production)
 CORS_ALLOW_ALL_ORIGINS = True
 
+# Media files configuration
 MEDIA_URL = '/media/'
-MEDIA_ROOT = Path(__file__).resolve().parent.parent / 'media'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+# Ensure media directory exists
+if not os.path.exists(MEDIA_ROOT):
+    os.makedirs(MEDIA_ROOT, exist_ok=True)
